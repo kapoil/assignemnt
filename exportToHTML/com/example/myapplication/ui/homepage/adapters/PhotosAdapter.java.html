@@ -1,0 +1,110 @@
+<html>
+<head>
+<title>PhotosAdapter.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+PhotosAdapter.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.myapplication.ui.homepage.adapters;</span>
+
+<span class="s0">import </span><span class="s1">android.content.Context;</span>
+<span class="s0">import </span><span class="s1">android.view.LayoutInflater;</span>
+<span class="s0">import </span><span class="s1">android.view.View;</span>
+<span class="s0">import </span><span class="s1">android.view.ViewGroup;</span>
+<span class="s0">import </span><span class="s1">android.widget.ImageView;</span>
+<span class="s0">import </span><span class="s1">android.widget.TextView;</span>
+
+<span class="s0">import </span><span class="s1">androidx.annotation.NonNull;</span>
+<span class="s0">import </span><span class="s1">androidx.recyclerview.widget.RecyclerView;</span>
+
+<span class="s0">import </span><span class="s1">com.bumptech.glide.Glide;</span>
+<span class="s0">import </span><span class="s1">com.example.myapplication.R;</span>
+
+<span class="s0">import </span><span class="s1">java.util.ArrayList;</span>
+<span class="s0">import </span><span class="s1">java.util.HashMap;</span>
+
+<span class="s0">public class </span><span class="s1">PhotosAdapter </span><span class="s0">extends </span><span class="s1">RecyclerView.Adapter&lt;PhotosAdapter.ItemViewHolder&gt; {</span>
+
+
+    <span class="s2">//    private final ArrayList&lt;Profile&gt; profile;</span>
+    <span class="s1">Context context;</span>
+    <span class="s1">ArrayList&lt;HashMap&gt; photos;</span>
+    <span class="s2">//endregion</span>
+
+    <span class="s2">//region Constructor methods</span>
+    <span class="s0">public </span><span class="s1">PhotosAdapter(ArrayList&lt;HashMap&gt; photos, Context context) {</span>
+        <span class="s0">this</span><span class="s1">.context = context;</span>
+        <span class="s0">this</span><span class="s1">.photos = photos;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@NonNull</span>
+    <span class="s1">@Override</span>
+    <span class="s0">public </span><span class="s1">PhotosAdapter.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, </span><span class="s0">int </span><span class="s1">viewType) {</span>
+        <span class="s0">return new </span><span class="s1">PhotosAdapter.ItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_photos,</span>
+                <span class="s1">parent, </span><span class="s0">false</span><span class="s1">));</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onBindViewHolder(@NonNull PhotosAdapter.ItemViewHolder holder, </span><span class="s0">int </span><span class="s1">position) {</span>
+        <span class="s1">HashMap hashMap = photos.get(position);</span>
+        <span class="s1">String name = (String) hashMap.get(</span><span class="s3">&quot;first_name&quot;</span><span class="s1">);</span>
+        <span class="s0">if </span><span class="s1">(name != </span><span class="s0">null </span><span class="s1">&amp;&amp; name != </span><span class="s3">&quot;&quot;</span><span class="s1">) {</span>
+            <span class="s1">holder.name.setVisibility(View.VISIBLE);</span>
+            <span class="s1">holder.name.setText(name);</span>
+        <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">holder.name.setVisibility(View.GONE);</span>
+            <span class="s1">holder.name.setText(</span><span class="s3">&quot;&quot;</span><span class="s1">);</span>
+
+        <span class="s1">}</span>
+
+        <span class="s1">String url = (String) hashMap.get(</span><span class="s3">&quot;photo&quot;</span><span class="s1">);</span>
+        <span class="s0">if </span><span class="s1">(url == </span><span class="s0">null </span><span class="s1">|| url == </span><span class="s3">&quot;&quot;</span><span class="s1">) {</span>
+            <span class="s1">url = (String) hashMap.get(</span><span class="s3">&quot;avatar&quot;</span><span class="s1">);</span>
+
+        <span class="s1">}</span>
+
+        <span class="s1">Glide.with(context)</span>
+                <span class="s1">.load(url)</span>
+                <span class="s1">.centerCrop()</span>
+                <span class="s1">.into(holder.photo);</span>
+
+
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public int </span><span class="s1">getItemCount() {</span>
+        <span class="s0">return </span><span class="s1">photos.size();</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public class </span><span class="s1">ItemViewHolder </span><span class="s0">extends </span><span class="s1">RecyclerView.ViewHolder {</span>
+        <span class="s1">TextView name;</span>
+        <span class="s2">//        TextView genderAndAge;</span>
+<span class="s2">//        TextView recentlyActive;</span>
+<span class="s2">//        TextView lastSeen;</span>
+        <span class="s1">ImageView photo;</span>
+
+
+        <span class="s0">public </span><span class="s1">ItemViewHolder(View itemView) {</span>
+            <span class="s0">super</span><span class="s1">(itemView);</span>
+
+            <span class="s1">name = itemView.findViewById(R.id.name_text);</span>
+<span class="s2">//            genderAndAge = itemView.findViewById(R.id.gender_age);</span>
+<span class="s2">//            recentlyActive = itemView.findViewById(R.id.recentlyActive);</span>
+<span class="s2">//            lastSeen = itemView.findViewById(R.id.lastSeen);</span>
+            <span class="s1">photo = itemView.findViewById(R.id.image);</span>
+        <span class="s1">}</span>
+
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<html>
+<head>
+<title>activity_detail.xml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808; font-style: italic;}
+.s1 { color: #174ad4;}
+.s2 { color: #080808;}
+.s3 { color: #067d17;}
+.s4 { color: #0033b3;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+activity_detail.xml</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;?</span><span class="s1">xml version</span><span class="s3">=&quot;1.0&quot; </span><span class="s1">encoding</span><span class="s3">=&quot;utf-8&quot;</span><span class="s0">?&gt;</span>
+
+<span class="s2">&lt;</span><span class="s4">ScrollView </span><span class="s1">xmlns:android</span><span class="s3">=&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="s1">xmlns:app</span><span class="s3">=&quot;http://schemas.android.com/apk/res-auto&quot;</span>
+    <span class="s1">xmlns:tools</span><span class="s3">=&quot;http://schemas.android.com/tools&quot;</span>
+    <span class="s1">android:layout_width</span><span class="s3">=&quot;match_parent&quot;</span>
+    <span class="s1">android:layout_height</span><span class="s3">=&quot;match_parent&quot;</span>
+    <span class="s1">tools:context</span><span class="s3">=&quot;.ui.homepage.activity.DetailActivity&quot;</span><span class="s2">&gt;</span>
+
+    <span class="s2">&lt;</span><span class="s4">RelativeLayout</span>
+        <span class="s1">android:layout_width</span><span class="s3">=&quot;match_parent&quot;</span>
+        <span class="s1">android:layout_height</span><span class="s3">=&quot;match_parent&quot;</span>
+        <span class="s1">android:animateLayoutChanges</span><span class="s3">=&quot;true&quot;</span>
+        <span class="s1">android:paddingBottom</span><span class="s3">=&quot;35dp&quot;</span><span class="s2">&gt;</span>
+
+        <span class="s2">&lt;</span><span class="s4">androidx.recyclerview.widget.RecyclerView</span>
+            <span class="s1">android:id</span><span class="s3">=&quot;@+id/recycler_view&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s3">=&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s3">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_margin</span><span class="s3">=&quot;5dp&quot; </span><span class="s2">/&gt;</span>
+
+
+        <span class="s2">&lt;</span><span class="s4">RelativeLayout</span>
+            <span class="s1">android:id</span><span class="s3">=&quot;@+id/work&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s3">=&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s3">=&quot;50dp&quot;</span>
+            <span class="s1">android:layout_below</span><span class="s3">=&quot;@id/recycler_view&quot;</span>
+            <span class="s1">android:layout_margin</span><span class="s3">=&quot;5dp&quot;</span>
+            <span class="s1">android:background</span><span class="s3">=&quot;@drawable/section_header&quot;</span><span class="s2">&gt;</span>
+
+            <span class="s2">&lt;</span><span class="s4">TextView</span>
+                <span class="s1">android:id</span><span class="s3">=&quot;@+id/workTitle&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s3">=&quot;wrap_content&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s3">=&quot;wrap_content&quot;</span>
+                <span class="s1">android:layout_centerVertical</span><span class="s3">=&quot;true&quot;</span>
+                <span class="s1">android:ellipsize</span><span class="s3">=&quot;end&quot;</span>
+                <span class="s1">android:maxLines</span><span class="s3">=&quot;3&quot;</span>
+                <span class="s1">android:paddingLeft</span><span class="s3">=&quot;10dp&quot;</span>
+                <span class="s1">android:text</span><span class="s3">=&quot;Work Experience&quot;</span>
+                <span class="s1">android:textColor</span><span class="s3">=&quot;@color/Yellow700&quot;</span>
+                <span class="s1">android:textSize</span><span class="s3">=&quot;18sp&quot; </span><span class="s2">/&gt;</span>
+
+            <span class="s2">&lt;</span><span class="s4">ImageView</span>
+                <span class="s1">android:id</span><span class="s3">=&quot;@+id/expand_collapse_work&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s3">=&quot;30dp&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s3">=&quot;30dp&quot;</span>
+                <span class="s1">android:layout_alignParentRight</span><span class="s3">=&quot;true&quot;</span>
+                <span class="s1">android:layout_centerVertical</span><span class="s3">=&quot;true&quot;</span>
+                <span class="s1">android:layout_marginRight</span><span class="s3">=&quot;15dp&quot;</span>
+                <span class="s1">android:background</span><span class="s3">=&quot;@android:color/transparent&quot;</span>
+                <span class="s1">android:src</span><span class="s3">=&quot;@drawable/ic_expand_more_white&quot;</span>
+                <span class="s1">app:tint</span><span class="s3">=&quot;@color/Yellow700&quot; </span><span class="s2">/&gt;</span>
+
+        <span class="s2">&lt;/</span><span class="s4">RelativeLayout</span><span class="s2">&gt;</span>
+
+        <span class="s2">&lt;</span><span class="s4">LinearLayout</span>
+            <span class="s1">android:id</span><span class="s3">=&quot;@+id/section_container_work&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s3">=&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s3">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_below</span><span class="s3">=&quot;@id/work&quot;</span>
+            <span class="s1">android:animateLayoutChanges</span><span class="s3">=&quot;true&quot;</span>
+            <span class="s1">android:orientation</span><span class="s3">=&quot;vertical&quot;</span>
+            <span class="s1">android:saveEnabled</span><span class="s3">=&quot;false&quot;</span><span class="s2">&gt;</span>
+
+        <span class="s2">&lt;/</span><span class="s4">LinearLayout</span><span class="s2">&gt;</span>
+
+        <span class="s2">&lt;</span><span class="s4">RelativeLayout</span>
+            <span class="s1">android:id</span><span class="s3">=&quot;@+id/general&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s3">=&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s3">=&quot;50dp&quot;</span>
+            <span class="s1">android:layout_below</span><span class="s3">=&quot;@id/section_container_work&quot;</span>
+            <span class="s1">android:layout_margin</span><span class="s3">=&quot;5dp&quot;</span>
+            <span class="s1">android:background</span><span class="s3">=&quot;@drawable/section_header&quot;</span><span class="s2">&gt;</span>
+
+            <span class="s2">&lt;</span><span class="s4">TextView</span>
+                <span class="s1">android:id</span><span class="s3">=&quot;@+id/general_Title&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s3">=&quot;wrap_content&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s3">=&quot;wrap_content&quot;</span>
+                <span class="s1">android:layout_centerVertical</span><span class="s3">=&quot;true&quot;</span>
+                <span class="s1">android:ellipsize</span><span class="s3">=&quot;end&quot;</span>
+                <span class="s1">android:maxLines</span><span class="s3">=&quot;3&quot;</span>
+                <span class="s1">android:paddingLeft</span><span class="s3">=&quot;10dp&quot;</span>
+                <span class="s1">android:text</span><span class="s3">=&quot;General Information&quot;</span>
+                <span class="s1">android:textColor</span><span class="s3">=&quot;@color/Yellow700&quot;</span>
+                <span class="s1">android:textSize</span><span class="s3">=&quot;18sp&quot; </span><span class="s2">/&gt;</span>
+
+            <span class="s2">&lt;</span><span class="s4">ImageView</span>
+                <span class="s1">android:id</span><span class="s3">=&quot;@+id/exapand_collapse_general&quot;</span>
+                <span class="s1">android:layout_width</span><span class="s3">=&quot;30dp&quot;</span>
+                <span class="s1">android:layout_height</span><span class="s3">=&quot;30dp&quot;</span>
+                <span class="s1">android:layout_alignParentRight</span><span class="s3">=&quot;true&quot;</span>
+                <span class="s1">android:layout_centerVertical</span><span class="s3">=&quot;true&quot;</span>
+                <span class="s1">android:layout_marginRight</span><span class="s3">=&quot;15dp&quot;</span>
+                <span class="s1">android:background</span><span class="s3">=&quot;@android:color/transparent&quot;</span>
+                <span class="s1">android:src</span><span class="s3">=&quot;@drawable/ic_expand_more_white&quot;</span>
+                <span class="s1">app:tint</span><span class="s3">=&quot;@color/Yellow700&quot; </span><span class="s2">/&gt;</span>
+
+        <span class="s2">&lt;/</span><span class="s4">RelativeLayout</span><span class="s2">&gt;</span>
+
+        <span class="s2">&lt;</span><span class="s4">LinearLayout</span>
+            <span class="s1">android:id</span><span class="s3">=&quot;@+id/section_container&quot;</span>
+            <span class="s1">android:layout_width</span><span class="s3">=&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height</span><span class="s3">=&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_below</span><span class="s3">=&quot;@id/general&quot;</span>
+            <span class="s1">android:animateLayoutChanges</span><span class="s3">=&quot;true&quot;</span>
+            <span class="s1">android:orientation</span><span class="s3">=&quot;vertical&quot;</span>
+            <span class="s1">android:saveEnabled</span><span class="s3">=&quot;false&quot;</span><span class="s2">&gt;</span>
+
+        <span class="s2">&lt;/</span><span class="s4">LinearLayout</span><span class="s2">&gt;</span>
+
+    <span class="s2">&lt;/</span><span class="s4">RelativeLayout</span><span class="s2">&gt;</span>
+
+<span class="s2">&lt;/</span><span class="s4">ScrollView</span><span class="s2">&gt;</span></pre>
+</body>
+</html>

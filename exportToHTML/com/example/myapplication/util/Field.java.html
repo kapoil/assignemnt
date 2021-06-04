@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Field.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Field.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.myapplication.util;</span>
+
+<span class="s0">import </span><span class="s1">android.content.Context;</span>
+<span class="s0">import </span><span class="s1">android.view.LayoutInflater;</span>
+<span class="s0">import </span><span class="s1">android.view.View;</span>
+<span class="s0">import </span><span class="s1">android.widget.LinearLayout;</span>
+<span class="s0">import </span><span class="s1">android.widget.TextView;</span>
+
+<span class="s0">import </span><span class="s1">com.example.myapplication.R;</span>
+
+<span class="s0">public class </span><span class="s1">Field  </span><span class="s0">extends </span><span class="s1">LinearLayout {</span>
+
+    <span class="s1">String title;</span>
+    <span class="s1">String answer;</span>
+
+    <span class="s0">public </span><span class="s1">Field(Context context , String title, String answer) {</span>
+        <span class="s0">super</span><span class="s1">(context);</span>
+        <span class="s0">this</span><span class="s1">.answer= answer;</span>
+        <span class="s0">this</span><span class="s1">.title = title;</span>
+        <span class="s1">init();</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">init() {</span>
+        <span class="s1">LayoutInflater inflater = (LayoutInflater)getContext()</span>
+                <span class="s1">.getSystemService(Context.LAYOUT_INFLATER_SERVICE);</span>
+        <span class="s1">View view = inflater.inflate( R.layout.layout_field, </span><span class="s0">this</span><span class="s1">);</span>
+
+
+        <span class="s1">TextView titleAsperField = view.findViewById(R.id.titleAsperField);</span>
+        <span class="s1">TextView answerAsPerField  = view.findViewById(R.id.answerAsPerField);</span>
+
+        <span class="s1">titleAsperField.setText(title);</span>
+        <span class="s1">answerAsPerField.setText(answer);</span>
+
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

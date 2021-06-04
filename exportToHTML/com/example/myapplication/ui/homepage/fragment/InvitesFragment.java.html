@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>InvitesFragment.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+InvitesFragment.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.myapplication.ui.homepage.fragment;</span>
+
+<span class="s0">import </span><span class="s1">android.os.Bundle;</span>
+<span class="s0">import </span><span class="s1">android.view.LayoutInflater;</span>
+<span class="s0">import </span><span class="s1">android.view.View;</span>
+<span class="s0">import </span><span class="s1">android.view.ViewGroup;</span>
+
+<span class="s0">import </span><span class="s1">androidx.fragment.app.Fragment;</span>
+<span class="s0">import </span><span class="s1">androidx.recyclerview.widget.DividerItemDecoration;</span>
+<span class="s0">import </span><span class="s1">androidx.recyclerview.widget.LinearLayoutManager;</span>
+<span class="s0">import </span><span class="s1">androidx.recyclerview.widget.RecyclerView;</span>
+
+<span class="s0">import </span><span class="s1">com.example.myapplication.R;</span>
+<span class="s0">import </span><span class="s1">com.example.myapplication.models.ModelProfile;</span>
+<span class="s0">import </span><span class="s1">com.example.myapplication.ui.homepage.adapters.ProfileAdapter;</span>
+<span class="s0">import </span><span class="s1">com.example.myapplication.util.Utils;</span>
+<span class="s0">import </span><span class="s1">com.fasterxml.jackson.databind.ObjectMapper;</span>
+
+<span class="s0">import </span><span class="s1">java.util.ArrayList;</span>
+<span class="s0">import </span><span class="s1">java.util.HashMap;</span>
+<span class="s0">import </span><span class="s1">java.util.List;</span>
+
+<span class="s0">import </span><span class="s1">butterknife.BindView;</span>
+<span class="s0">import </span><span class="s1">butterknife.ButterKnife;</span>
+
+<span class="s0">public class </span><span class="s1">InvitesFragment </span><span class="s0">extends </span><span class="s1">Fragment {</span>
+
+    <span class="s2">//region view variable</span>
+    <span class="s1">@BindView(R.id.recycler_view)</span>
+     <span class="s1">RecyclerView recyclerView;</span>
+    <span class="s2">//endregion</span>
+
+    <span class="s1">HashMap invites = </span><span class="s0">new </span><span class="s1">HashMap();</span>
+    <span class="s1">ArrayList&lt;ModelProfile&gt; profiles;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public </span><span class="s1">View onCreateView(LayoutInflater inflater, </span><span class="s0">final </span><span class="s1">ViewGroup container, Bundle savedInstanceState) {</span>
+        <span class="s1">View rootView = inflater.inflate(R.layout.fragment_invites, container, </span><span class="s0">false</span><span class="s1">);</span>
+        <span class="s1">ButterKnife.bind(</span><span class="s0">this</span><span class="s1">,rootView);</span>
+
+        <span class="s1">setUpDataFromBundle();</span>
+        <span class="s1">setUpRecyclerView();</span>
+
+        <span class="s1">Utils.showToast(getContext(),</span><span class="s3">&quot;Please tap Image for more details&quot;</span><span class="s1">);</span>
+        <span class="s0">return </span><span class="s1">rootView;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">setUpRecyclerView() {</span>
+        <span class="s1">ProfileAdapter adapter = </span><span class="s0">new </span><span class="s1">ProfileAdapter(profiles, getContext());</span>
+        <span class="s1">recyclerView.setLayoutManager(</span><span class="s0">new </span><span class="s1">LinearLayoutManager(getContext()));</span>
+        <span class="s1">recyclerView.addItemDecoration(</span><span class="s0">new </span><span class="s1">DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));</span>
+        <span class="s1">recyclerView.setAdapter(adapter);</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">setUpDataFromBundle() {</span>
+        <span class="s1">Bundle bundle = getArguments();</span>
+        <span class="s0">if </span><span class="s1">(bundle != </span><span class="s0">null</span><span class="s1">) {</span>
+            <span class="s1">invites= (HashMap) bundle.getSerializable(</span><span class="s3">&quot;invites&quot;</span><span class="s1">);</span>
+        <span class="s1">}</span>
+
+        <span class="s1">ObjectMapper objectMapper = </span><span class="s0">new </span><span class="s1">ObjectMapper();</span>
+        <span class="s1">profiles = objectMapper.convertValue(invites.get(</span><span class="s3">&quot;profiles&quot;</span><span class="s1">),</span>
+                <span class="s1">objectMapper.getTypeFactory().constructCollectionType(List.</span><span class="s0">class</span><span class="s1">, ModelProfile.</span><span class="s0">class</span><span class="s1">));</span>
+
+
+    <span class="s1">}</span>
+
+    <span class="s2">// TODO: Rename and change types and number of parameters</span>
+    <span class="s0">public static </span><span class="s1">InvitesFragment newInstance(HashMap invites) {</span>
+        <span class="s1">InvitesFragment fragment = </span><span class="s0">new </span><span class="s1">InvitesFragment();</span>
+        <span class="s1">Bundle extras = </span><span class="s0">new </span><span class="s1">Bundle();</span>
+        <span class="s1">extras.putSerializable(</span><span class="s3">&quot;invites&quot;</span><span class="s1">,invites);</span>
+        <span class="s1">fragment.setArguments(extras);</span>
+        <span class="s0">return </span><span class="s1">fragment;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

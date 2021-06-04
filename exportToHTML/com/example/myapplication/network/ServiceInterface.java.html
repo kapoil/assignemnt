@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>ServiceInterface.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ServiceInterface.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.myapplication.network;</span>
+
+<span class="s0">import </span><span class="s1">java.util.HashMap;</span>
+
+<span class="s0">import </span><span class="s1">retrofit2.Call;</span>
+<span class="s0">import </span><span class="s1">retrofit2.http.Body;</span>
+<span class="s0">import </span><span class="s1">retrofit2.http.GET;</span>
+<span class="s0">import </span><span class="s1">retrofit2.http.Header;</span>
+<span class="s0">import </span><span class="s1">retrofit2.http.Headers;</span>
+<span class="s0">import </span><span class="s1">retrofit2.http.POST;</span>
+
+<span class="s0">public interface </span><span class="s1">ServiceInterface {</span>
+
+
+    <span class="s1">@Headers({</span><span class="s2">&quot;Content-Type:application/json&quot;</span><span class="s1">, </span><span class="s2">&quot;Accept:application/json&quot;</span><span class="s1">})</span>
+    <span class="s1">@POST(</span><span class="s2">&quot;phone_number_login&quot;</span><span class="s1">)</span>
+    <span class="s1">Call&lt;Object&gt; getData(@Body HashMap arguments);</span>
+
+
+    <span class="s1">@Headers({</span><span class="s2">&quot;Content-Type:application/json&quot;</span><span class="s1">, </span><span class="s2">&quot;Accept:application/json&quot;</span><span class="s1">})</span>
+    <span class="s1">@POST(</span><span class="s2">&quot;verify_otp&quot;</span><span class="s1">)</span>
+    <span class="s1">Call&lt;Object&gt; verifyOtp(@Body HashMap arguments);</span>
+
+
+    <span class="s1">@Headers({</span><span class="s2">&quot;Content-Type:application/json&quot;</span><span class="s1">, </span><span class="s2">&quot;Accept:application/json&quot;</span><span class="s1">})</span>
+    <span class="s1">@GET(</span><span class="s2">&quot;test_profile_list&quot;</span><span class="s1">)</span>
+    <span class="s1">Call&lt;Object&gt; verifyAuth(@Header(</span><span class="s2">&quot;Authorization&quot;</span><span class="s1">) String authorization);</span>
+
+
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

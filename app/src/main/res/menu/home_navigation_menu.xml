@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/discover"
+        android:icon="@drawable/ic_discover_state"
+        android:title="Discover"
+        app:showAsAction="always|withText"/>
+
+    <item
+        android:id="@+id/invites"
+        android:icon="@drawable/ic_message_state"
+        android:title="invites"
+        app:showAsAction="always|withText"/>
+
+
+    <item
+        android:id="@+id/likes"
+        android:icon="@drawable/notes_24"
+        android:title="Notes"
+        app:showAsAction="always|withText"/>
+
+
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_contact_state"
+        android:title="profile"
+        app:showAsAction="always|withText"/>
+
+</menu>

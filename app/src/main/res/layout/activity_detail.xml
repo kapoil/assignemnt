@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.homepage.activity.DetailActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:paddingBottom="35dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp" />
+
+
+        <RelativeLayout
+            android:id="@+id/work"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/recycler_view"
+            android:layout_margin="5dp"
+            android:background="@drawable/section_header">
+
+            <TextView
+                android:id="@+id/workTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:paddingLeft="10dp"
+                android:text="Work Experience"
+                android:textColor="@color/Yellow700"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/expand_collapse_work"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_expand_more_white"
+                app:tint="@color/Yellow700" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/section_container_work"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/work"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical"
+            android:saveEnabled="false">
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/general"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/section_container_work"
+            android:layout_margin="5dp"
+            android:background="@drawable/section_header">
+
+            <TextView
+                android:id="@+id/general_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:paddingLeft="10dp"
+                android:text="General Information"
+                android:textColor="@color/Yellow700"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/exapand_collapse_general"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_expand_more_white"
+                app:tint="@color/Yellow700" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/section_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/general"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical"
+            android:saveEnabled="false">
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

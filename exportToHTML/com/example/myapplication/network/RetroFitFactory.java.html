@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>RetroFitFactory.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+RetroFitFactory.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.myapplication.network;</span>
+
+<span class="s0">import </span><span class="s1">retrofit2.Call;</span>
+<span class="s0">import </span><span class="s1">retrofit2.Callback;</span>
+<span class="s0">import </span><span class="s1">retrofit2.Response;</span>
+<span class="s0">import </span><span class="s1">retrofit2.Retrofit;</span>
+<span class="s0">import </span><span class="s1">retrofit2.converter.jackson.JacksonConverterFactory;</span>
+
+<span class="s0">public class </span><span class="s1">RetroFitFactory {</span>
+
+    <span class="s0">private static </span><span class="s1">Retrofit retrofitFactory = </span><span class="s0">new </span><span class="s1">Retrofit.Builder().baseUrl(getBaseUrl())</span>
+            <span class="s1">.addConverterFactory(JacksonConverterFactory.create())</span>
+            <span class="s1">.build();</span>
+
+
+    <span class="s0">public static </span><span class="s1">Retrofit getInstance() {</span>
+        <span class="s0">return </span><span class="s1">retrofitFactory;</span>
+    <span class="s1">}</span>
+
+
+    <span class="s0">public static boolean </span><span class="s1">isValidResponse(Response&lt;Object&gt; response) {</span>
+        <span class="s0">return </span><span class="s1">(response != </span><span class="s0">null </span><span class="s1">&amp;&amp; response.body() != </span><span class="s0">null</span><span class="s1">);</span>
+    <span class="s1">}</span>
+
+
+    <span class="s0">public static </span><span class="s1">String getBaseUrl() {</span>
+        <span class="s0">return </span><span class="s2">&quot;https://testa2.aisle.co/V1/users/&quot;</span><span class="s1">;</span>
+    <span class="s1">}</span>
+
+
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

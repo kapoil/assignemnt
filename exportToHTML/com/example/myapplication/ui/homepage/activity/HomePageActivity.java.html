@@ -1,0 +1,176 @@
+<html>
+<head>
+<title>HomePageActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #1750eb;}
+.s4 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+HomePageActivity.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.myapplication.ui.homepage.activity;</span>
+
+<span class="s0">import </span><span class="s1">android.os.Bundle;</span>
+
+<span class="s0">import </span><span class="s1">androidx.appcompat.app.AppCompatActivity;</span>
+<span class="s0">import </span><span class="s1">androidx.fragment.app.Fragment;</span>
+<span class="s0">import </span><span class="s1">androidx.fragment.app.FragmentManager;</span>
+
+<span class="s0">import </span><span class="s1">com.aurelhubert.ahbottomnavigation.AHBottomNavigation;</span>
+<span class="s0">import </span><span class="s1">com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;</span>
+<span class="s0">import </span><span class="s1">com.example.myapplication.R;</span>
+<span class="s0">import </span><span class="s1">com.example.myapplication.ui.homepage.fragment.DicoverFragment;</span>
+<span class="s0">import </span><span class="s1">com.example.myapplication.ui.homepage.fragment.InvitesFragment;</span>
+<span class="s0">import </span><span class="s1">com.example.myapplication.ui.homepage.fragment.LikesFragment;</span>
+<span class="s0">import </span><span class="s1">com.example.myapplication.ui.homepage.fragment.ProfileFragment;</span>
+<span class="s0">import </span><span class="s1">com.example.myapplication.util.TabInfo;</span>
+
+<span class="s0">import </span><span class="s1">java.lang.reflect.Field;</span>
+<span class="s0">import </span><span class="s1">java.util.ArrayList;</span>
+<span class="s0">import </span><span class="s1">java.util.HashMap;</span>
+
+<span class="s0">import </span><span class="s1">butterknife.BindView;</span>
+<span class="s0">import </span><span class="s1">butterknife.ButterKnife;</span>
+
+
+<span class="s0">public class </span><span class="s1">HomePageActivity </span><span class="s0">extends </span><span class="s1">AppCompatActivity {</span>
+
+    <span class="s2">//region view variable</span>
+    <span class="s1">@BindView(R.id.navigationView)</span>
+    <span class="s1">AHBottomNavigation bottomNavigationView;</span>
+    <span class="s2">//endregion</span>
+
+    <span class="s2">//region member variable</span>
+    <span class="s1">ArrayList&lt;TabInfo&gt; tabInfos = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;();</span>
+    <span class="s1">FragmentManager fm;</span>
+    <span class="s1">HashMap invites = </span><span class="s0">new </span><span class="s1">HashMap();</span>
+    <span class="s1">HashMap likes = </span><span class="s0">new </span><span class="s1">HashMap();</span>
+    <span class="s0">int </span><span class="s1">invitesCount = </span><span class="s3">0</span><span class="s1">;</span>
+    <span class="s0">int </span><span class="s1">likesCount = </span><span class="s3">0</span><span class="s1">;</span>
+    <span class="s2">//endregion</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState);</span>
+        <span class="s1">setContentView(R.layout.activity_home_page);</span>
+        <span class="s1">ButterKnife.bind(</span><span class="s0">this</span><span class="s1">);</span>
+
+        <span class="s2">//setting up variables for view</span>
+        <span class="s1">setUpDataFromBundle();</span>
+        <span class="s1">setUpTabInfoList();</span>
+        <span class="s1">setUpBottomBar(</span><span class="s4">&quot;D&quot;</span><span class="s1">);</span>
+    <span class="s1">}</span>
+
+    <span class="s2">//region helper methods</span>
+    <span class="s0">private void </span><span class="s1">setUpTabInfoList() {</span>
+        <span class="s1">tabInfos = </span><span class="s0">new </span><span class="s1">ArrayList&lt;&gt;();</span>
+        <span class="s1">tabInfos.add(</span><span class="s0">new </span><span class="s1">TabInfo(</span><span class="s4">&quot;D&quot;</span><span class="s1">, </span><span class="s4">&quot;discover&quot;</span><span class="s1">, </span><span class="s4">&quot;ic_discover_state&quot;</span><span class="s1">));</span>
+        <span class="s1">tabInfos.add(</span><span class="s0">new </span><span class="s1">TabInfo(</span><span class="s4">&quot;L&quot;</span><span class="s1">, </span><span class="s4">&quot;Likes&quot;</span><span class="s1">, </span><span class="s4">&quot;notes_24&quot;</span><span class="s1">));</span>
+        <span class="s1">tabInfos.add(</span><span class="s0">new </span><span class="s1">TabInfo(</span><span class="s4">&quot;I&quot;</span><span class="s1">, </span><span class="s4">&quot;Invites&quot;</span><span class="s1">, </span><span class="s4">&quot;ic_message_state&quot;</span><span class="s1">));</span>
+        <span class="s1">tabInfos.add(</span><span class="s0">new </span><span class="s1">TabInfo(</span><span class="s4">&quot;P&quot;</span><span class="s1">, </span><span class="s4">&quot;Profile&quot;</span><span class="s1">, </span><span class="s4">&quot;ic_contact_state&quot;</span><span class="s1">));</span>
+    <span class="s1">}</span>
+
+
+    <span class="s0">private void </span><span class="s1">setUpDataFromBundle() {</span>
+        <span class="s1">Bundle bundle = </span><span class="s0">this</span><span class="s1">.getIntent().getExtras();</span>
+
+        <span class="s0">if </span><span class="s1">(bundle != </span><span class="s0">null</span><span class="s1">) {</span>
+            <span class="s1">HashMap hashMap = (HashMap) bundle.getSerializable(</span><span class="s4">&quot;HashMap&quot;</span><span class="s1">);</span>
+            <span class="s1">invites = (HashMap) hashMap.get(</span><span class="s4">&quot;invites&quot;</span><span class="s1">);</span>
+            <span class="s1">likes = (HashMap) hashMap.get(</span><span class="s4">&quot;likes&quot;</span><span class="s1">);</span>
+        <span class="s1">}</span>
+
+        <span class="s1">invitesCount = (</span><span class="s0">int</span><span class="s1">) invites.get(</span><span class="s4">&quot;pending_invitations_count&quot;</span><span class="s1">);</span>
+        <span class="s1">likesCount = (</span><span class="s0">int</span><span class="s1">) likes.get(</span><span class="s4">&quot;likes_received_count&quot;</span><span class="s1">);</span>
+
+
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">setUpBottomBar(String landingTabId) {</span>
+
+        <span class="s1">bottomNavigationView.setTitleState(AHBottomNavigation.TitleState.SHOW_WHEN_ACTIVE);</span>
+
+        <span class="s1">bottomNavigationView.setInactiveColor(getResources().getColor(R.color.inActive));</span>
+
+        <span class="s1">bottomNavigationView.setAccentColor(getResources().getColor(R.color.Active));</span>
+
+        <span class="s1">bottomNavigationView.setNotificationBackgroundColor(getResources().getColor(R.color.purple_500));</span>
+        <span class="s1">fm = getSupportFragmentManager();</span>
+        <span class="s0">for </span><span class="s1">(TabInfo tabInfo : tabInfos) {</span>
+            <span class="s0">int </span><span class="s1">resourceId = getResId(tabInfo.getIcon(), R.drawable.</span><span class="s0">class</span><span class="s1">);</span>
+            <span class="s1">String title = tabInfo.getTitle();</span>
+
+            <span class="s1">AHBottomNavigationItem item = </span><span class="s0">new </span><span class="s1">AHBottomNavigationItem(title, resourceId);</span>
+            <span class="s1">bottomNavigationView.addItem(item);</span>
+
+        <span class="s1">}</span>
+
+        <span class="s1">Fragment fragment = DicoverFragment.newInstance();</span>
+        <span class="s1">getSupportFragmentManager().beginTransaction().replace(R.id.fragmentHost, fragment).commit();</span>
+        <span class="s0">int </span><span class="s1">index = getTabIndex(landingTabId, tabInfos);</span>
+        <span class="s1">bottomNavigationView.setNotification(invitesCount + </span><span class="s4">&quot;&quot;</span><span class="s1">, </span><span class="s3">2</span><span class="s1">);</span>
+        <span class="s1">bottomNavigationView.setNotification(likesCount + </span><span class="s4">&quot;&quot;</span><span class="s1">, </span><span class="s3">1</span><span class="s1">);</span>
+        <span class="s1">bottomNavigationView.setCurrentItem(index);</span>
+        <span class="s1">bottomNavigationView.setOnTabSelectedListener(</span><span class="s0">new </span><span class="s1">AHBottomNavigation.OnTabSelectedListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public boolean </span><span class="s1">onTabSelected(</span><span class="s0">int </span><span class="s1">position, </span><span class="s0">boolean </span><span class="s1">wasSelected) {</span>
+                <span class="s0">switch </span><span class="s1">(position) {</span>
+                    <span class="s0">default</span><span class="s1">:</span>
+                        <span class="s0">if </span><span class="s1">(position == </span><span class="s3">0</span><span class="s1">) {</span>
+                            <span class="s1">Fragment fragment = DicoverFragment.newInstance();</span>
+                            <span class="s1">getSupportFragmentManager().beginTransaction().replace(R.id.fragmentHost, fragment).commit();</span>
+
+                        <span class="s1">} </span><span class="s0">else if </span><span class="s1">(position == </span><span class="s3">1</span><span class="s1">) {</span>
+                            <span class="s1">Fragment fragment = LikesFragment.newInstance(likes);</span>
+                            <span class="s1">getSupportFragmentManager().beginTransaction().replace(R.id.fragmentHost, fragment).commit();</span>
+
+                        <span class="s1">} </span><span class="s0">else if </span><span class="s1">(position == </span><span class="s3">2</span><span class="s1">) {</span>
+                            <span class="s1">Fragment fragment = InvitesFragment.newInstance(invites);</span>
+                            <span class="s1">getSupportFragmentManager().beginTransaction().replace(R.id.fragmentHost, fragment).commit();</span>
+
+                        <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                            <span class="s1">Fragment fragment = ProfileFragment.newInstance();</span>
+                            <span class="s1">getSupportFragmentManager().beginTransaction().replace(R.id.fragmentHost, fragment).commit();</span>
+                        <span class="s1">}</span>
+                <span class="s1">}</span>
+
+                <span class="s0">return true</span><span class="s1">;</span>
+            <span class="s1">}</span>
+        <span class="s1">});</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public int </span><span class="s1">getResId(String resName, Class&lt;?&gt; c) {</span>
+        <span class="s0">try </span><span class="s1">{</span>
+            <span class="s1">Field idField = c.getDeclaredField(resName);</span>
+            <span class="s0">return </span><span class="s1">idField.getInt(idField);</span>
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(Exception e) {</span>
+            <span class="s1">e.printStackTrace();</span>
+            <span class="s0">return </span><span class="s1">-</span><span class="s3">1</span><span class="s1">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public int </span><span class="s1">getTabIndex(String landingTabId, ArrayList&lt;TabInfo&gt; tabs) {</span>
+        <span class="s0">int </span><span class="s1">result = </span><span class="s3">0</span><span class="s1">;</span>
+
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">tab_index = </span><span class="s3">0</span><span class="s1">; tab_index &lt; tabs.size(); ++tab_index) {</span>
+            <span class="s0">if </span><span class="s1">(landingTabId.equalsIgnoreCase(tabs.get(tab_index).getId())) {</span>
+                <span class="s1">result = tab_index;</span>
+                <span class="s0">break</span><span class="s1">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s0">return </span><span class="s1">result;</span>
+    <span class="s1">}</span>
+    <span class="s2">//endregion</span>
+
+<span class="s1">}</span></pre>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>LogInActivity_ViewBinding.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+LogInActivity_ViewBinding.java</font>
+</center></td></tr></table>
+<pre><span class="s0">// Generated code from Butter Knife. Do not modify!</span>
+<span class="s2">package </span><span class="s1">com.example.myapplication.ui.login;</span>
+
+<span class="s2">import </span><span class="s1">android.view.View;</span>
+<span class="s2">import </span><span class="s1">android.widget.EditText;</span>
+<span class="s2">import </span><span class="s1">android.widget.ImageView;</span>
+<span class="s2">import </span><span class="s1">android.widget.TextView;</span>
+<span class="s2">import </span><span class="s1">androidx.annotation.CallSuper;</span>
+<span class="s2">import </span><span class="s1">androidx.annotation.UiThread;</span>
+<span class="s2">import </span><span class="s1">butterknife.Unbinder;</span>
+<span class="s2">import </span><span class="s1">butterknife.internal.Utils;</span>
+<span class="s2">import </span><span class="s1">com.example.myapplication.R;</span>
+<span class="s2">import </span><span class="s1">java.lang.IllegalStateException;</span>
+<span class="s2">import </span><span class="s1">java.lang.Override;</span>
+
+<span class="s2">public class </span><span class="s1">LogInActivity_ViewBinding </span><span class="s2">implements </span><span class="s1">Unbinder {</span>
+  <span class="s2">private </span><span class="s1">LogInActivity target;</span>
+
+  <span class="s1">@UiThread</span>
+  <span class="s2">public </span><span class="s1">LogInActivity_ViewBinding(LogInActivity target) {</span>
+    <span class="s2">this</span><span class="s1">(target, target.getWindow().getDecorView());</span>
+  <span class="s1">}</span>
+
+  <span class="s1">@UiThread</span>
+  <span class="s2">public </span><span class="s1">LogInActivity_ViewBinding(LogInActivity target, View source) {</span>
+    <span class="s2">this</span><span class="s1">.target = target;</span>
+
+    <span class="s1">target.continueText = Utils.findRequiredViewAsType(source, R.id.continue_button, </span><span class="s3">&quot;field 'continueText'&quot;</span><span class="s1">, TextView.</span><span class="s2">class</span><span class="s1">);</span>
+    <span class="s1">target.phoneNumberEditText = Utils.findRequiredViewAsType(source, R.id.phone_number_editText, </span><span class="s3">&quot;field 'phoneNumberEditText'&quot;</span><span class="s1">, EditText.</span><span class="s2">class</span><span class="s1">);</span>
+    <span class="s1">target.otpEditText = Utils.findRequiredViewAsType(source, R.id.otp_editText, </span><span class="s3">&quot;field 'otpEditText'&quot;</span><span class="s1">, EditText.</span><span class="s2">class</span><span class="s1">);</span>
+    <span class="s1">target.phoneNumberprefix = Utils.findRequiredViewAsType(source, R.id.phone_number_prefix, </span><span class="s3">&quot;field 'phoneNumberprefix'&quot;</span><span class="s1">, TextView.</span><span class="s2">class</span><span class="s1">);</span>
+    <span class="s1">target.editIconImageView = Utils.findRequiredViewAsType(source, R.id.edit_icon_imageView, </span><span class="s3">&quot;field 'editIconImageView'&quot;</span><span class="s1">, ImageView.</span><span class="s2">class</span><span class="s1">);</span>
+    <span class="s1">target.getOtpTextView = Utils.findRequiredViewAsType(source, R.id.get_otp_textView, </span><span class="s3">&quot;field 'getOtpTextView'&quot;</span><span class="s1">, TextView.</span><span class="s2">class</span><span class="s1">);</span>
+    <span class="s1">target.phoneTextView = Utils.findRequiredViewAsType(source, R.id.phone_textView, </span><span class="s3">&quot;field 'phoneTextView'&quot;</span><span class="s1">, TextView.</span><span class="s2">class</span><span class="s1">);</span>
+  <span class="s1">}</span>
+
+  <span class="s1">@Override</span>
+  <span class="s1">@CallSuper</span>
+  <span class="s2">public void </span><span class="s1">unbind() {</span>
+    <span class="s1">LogInActivity target = </span><span class="s2">this</span><span class="s1">.target;</span>
+    <span class="s2">if </span><span class="s1">(target == </span><span class="s2">null</span><span class="s1">) </span><span class="s2">throw new </span><span class="s1">IllegalStateException(</span><span class="s3">&quot;Bindings already cleared.&quot;</span><span class="s1">);</span>
+    <span class="s2">this</span><span class="s1">.target = </span><span class="s2">null</span><span class="s1">;</span>
+
+    <span class="s1">target.continueText = </span><span class="s2">null</span><span class="s1">;</span>
+    <span class="s1">target.phoneNumberEditText = </span><span class="s2">null</span><span class="s1">;</span>
+    <span class="s1">target.otpEditText = </span><span class="s2">null</span><span class="s1">;</span>
+    <span class="s1">target.phoneNumberprefix = </span><span class="s2">null</span><span class="s1">;</span>
+    <span class="s1">target.editIconImageView = </span><span class="s2">null</span><span class="s1">;</span>
+    <span class="s1">target.getOtpTextView = </span><span class="s2">null</span><span class="s1">;</span>
+    <span class="s1">target.phoneTextView = </span><span class="s2">null</span><span class="s1">;</span>
+  <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

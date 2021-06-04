@@ -1,0 +1,178 @@
+<html>
+<head>
+<title>DetailActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #067d17;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+DetailActivity.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.myapplication.ui.homepage.activity;</span>
+
+<span class="s0">import </span><span class="s1">android.os.Bundle;</span>
+<span class="s0">import </span><span class="s1">android.view.View;</span>
+<span class="s0">import </span><span class="s1">android.view.animation.Animation;</span>
+<span class="s0">import </span><span class="s1">android.view.animation.Transformation;</span>
+<span class="s0">import </span><span class="s1">android.widget.LinearLayout;</span>
+<span class="s0">import </span><span class="s1">android.widget.RelativeLayout;</span>
+<span class="s0">import </span><span class="s1">android.widget.TextView;</span>
+
+<span class="s0">import </span><span class="s1">androidx.appcompat.app.AppCompatActivity;</span>
+<span class="s0">import </span><span class="s1">androidx.recyclerview.widget.LinearLayoutManager;</span>
+<span class="s0">import </span><span class="s1">androidx.recyclerview.widget.RecyclerView;</span>
+
+<span class="s0">import </span><span class="s1">com.example.myapplication.models.ModelProfile;</span>
+<span class="s0">import </span><span class="s1">com.example.myapplication.ui.homepage.adapters.PhotosAdapter;</span>
+<span class="s0">import </span><span class="s1">com.example.myapplication.util.Field;</span>
+<span class="s0">import </span><span class="s1">com.example.myapplication.R;</span>
+
+<span class="s0">import </span><span class="s1">java.util.HashMap;</span>
+
+<span class="s0">import </span><span class="s1">butterknife.BindView;</span>
+<span class="s0">import </span><span class="s1">butterknife.ButterKnife;</span>
+
+<span class="s0">public class </span><span class="s1">DetailActivity </span><span class="s0">extends </span><span class="s1">AppCompatActivity {</span>
+
+    <span class="s1">@BindView(R.id.workTitle)</span>
+    <span class="s1">TextView workTitle;</span>
+
+    <span class="s1">@BindView(R.id.general_Title)</span>
+    <span class="s1">TextView generalTitle;</span>
+
+    <span class="s1">@BindView(R.id.work)</span>
+    <span class="s1">RelativeLayout workRelativeLayout;</span>
+
+    <span class="s1">@BindView(R.id.general)</span>
+    <span class="s1">RelativeLayout generalRelativeLayout;</span>
+
+    <span class="s1">@BindView(R.id.section_container_work)</span>
+    <span class="s1">LinearLayout workContainer;</span>
+
+    <span class="s1">@BindView(R.id.section_container)</span>
+    <span class="s1">LinearLayout generalContainer;</span>
+
+    <span class="s1">HashMap preferences = </span><span class="s0">new </span><span class="s1">HashMap();</span>
+    <span class="s1">HashMap general = </span><span class="s0">new </span><span class="s1">HashMap();</span>
+    <span class="s1">HashMap work = </span><span class="s0">new </span><span class="s1">HashMap();</span>
+    <span class="s1">ModelProfile modelProfile;</span>
+    <span class="s0">boolean </span><span class="s1">isCollapsed;</span>
+
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState);</span>
+        <span class="s1">setContentView(R.layout.activity_detail);</span>
+
+        <span class="s1">ButterKnife.bind(</span><span class="s0">this</span><span class="s1">);</span>
+        <span class="s1">RecyclerView recyclerView = findViewById(R.id.recycler_view);</span>
+
+        <span class="s1">Bundle bundle = </span><span class="s0">this</span><span class="s1">.getIntent().getExtras();</span>
+
+        <span class="s0">if </span><span class="s1">(bundle != </span><span class="s0">null</span><span class="s1">) {</span>
+            <span class="s1">modelProfile = (ModelProfile) bundle.getSerializable(</span><span class="s2">&quot;Profile&quot;</span><span class="s1">);</span>
+        <span class="s1">}</span>
+
+        <span class="s1">general = modelProfile.getGeneral_information();</span>
+        <span class="s1">work = modelProfile.getWork();</span>
+
+
+        <span class="s1">PhotosAdapter adapter = </span><span class="s0">new </span><span class="s1">PhotosAdapter(modelProfile.getPhotos(), </span><span class="s0">this</span><span class="s1">);</span>
+        <span class="s1">recyclerView.setLayoutManager(</span><span class="s0">new </span><span class="s1">LinearLayoutManager(</span><span class="s0">this</span><span class="s1">, LinearLayoutManager.HORIZONTAL, </span><span class="s0">false</span><span class="s1">));</span>
+        <span class="s1">recyclerView.setAdapter(adapter);</span>
+
+        <span class="s0">for </span><span class="s1">(Object key : general.keySet()) {</span>
+            <span class="s0">if </span><span class="s1">(general.get(key) </span><span class="s0">instanceof </span><span class="s1">String) {</span>
+                <span class="s1">String ans = (String) general.get(key);</span>
+                <span class="s1">Field field = </span><span class="s0">new </span><span class="s1">Field(</span><span class="s0">this</span><span class="s1">, (String) key, ans);</span>
+                <span class="s1">generalContainer.addView(field);</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s0">for </span><span class="s1">(Object key : work.keySet()) {</span>
+            <span class="s0">if </span><span class="s1">(work.get(key) </span><span class="s0">instanceof </span><span class="s1">String) {</span>
+                <span class="s1">String ans = (String) work.get(key);</span>
+                <span class="s1">Field field = </span><span class="s0">new </span><span class="s1">Field(</span><span class="s0">this</span><span class="s1">, (String) key, ans);</span>
+                <span class="s1">workContainer.addView(field);</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s1">workRelativeLayout.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View v) {</span>
+                <span class="s1">OnClickExpandCollapse(workContainer);</span>
+            <span class="s1">}</span>
+        <span class="s1">});</span>
+        <span class="s1">generalRelativeLayout.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View v) {</span>
+                <span class="s1">OnClickExpandCollapse(generalContainer);</span>
+            <span class="s1">}</span>
+        <span class="s1">});</span>
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">OnClickExpandCollapse(View container) {</span>
+        <span class="s0">if </span><span class="s1">(isCollapsed) {</span>
+            <span class="s1">expand(container);</span>
+            <span class="s1">isCollapsed = </span><span class="s0">false</span><span class="s1">;</span>
+        <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">collapse(container);</span>
+            <span class="s1">isCollapsed = </span><span class="s0">true</span><span class="s1">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">expand(</span><span class="s0">final </span><span class="s1">View v) {</span>
+        <span class="s1">v.measure(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);</span>
+        <span class="s0">final int </span><span class="s1">targtetHeight = v.getMeasuredHeight();</span>
+
+        <span class="s1">v.getLayoutParams().height = </span><span class="s3">0</span><span class="s1">;</span>
+        <span class="s1">v.setVisibility(View.VISIBLE);</span>
+        <span class="s1">Animation a = </span><span class="s0">new </span><span class="s1">Animation() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">protected void </span><span class="s1">applyTransformation(</span><span class="s0">float </span><span class="s1">interpolatedTime, Transformation t) {</span>
+                <span class="s1">v.getLayoutParams().height = LinearLayout.LayoutParams.WRAP_CONTENT;</span>
+                <span class="s1">v.requestLayout();</span>
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public boolean </span><span class="s1">willChangeBounds() {</span>
+                <span class="s0">return false</span><span class="s1">;</span>
+            <span class="s1">}</span>
+        <span class="s1">};</span>
+
+        <span class="s1">v.startAnimation(a);</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">collapse(</span><span class="s0">final </span><span class="s1">View v) {</span>
+        <span class="s0">final int </span><span class="s1">initialHeight = v.getMeasuredHeight();</span>
+
+        <span class="s1">Animation a = </span><span class="s0">new </span><span class="s1">Animation() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">protected void </span><span class="s1">applyTransformation(</span><span class="s0">float </span><span class="s1">interpolatedTime, Transformation t) {</span>
+                <span class="s0">if </span><span class="s1">(interpolatedTime == </span><span class="s3">1</span><span class="s1">) {</span>
+                    <span class="s1">v.setVisibility(View.GONE);</span>
+                <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                    <span class="s1">v.getLayoutParams().height = initialHeight - (</span><span class="s0">int</span><span class="s1">) (initialHeight * interpolatedTime);</span>
+                    <span class="s1">v.requestLayout();</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+
+            <span class="s1">@Override</span>
+            <span class="s0">public boolean </span><span class="s1">willChangeBounds() {</span>
+                <span class="s0">return false</span><span class="s1">;</span>
+            <span class="s1">}</span>
+        <span class="s1">};</span>
+
+        <span class="s1">v.startAnimation(a);</span>
+    <span class="s1">}</span>
+
+<span class="s1">}</span></pre>
+</body>
+</html>

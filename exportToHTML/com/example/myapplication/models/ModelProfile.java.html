@@ -1,0 +1,225 @@
+<html>
+<head>
+<title>ModelProfile.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ModelProfile.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.myapplication.models;</span>
+
+<span class="s0">import </span><span class="s1">java.io.Serializable;</span>
+<span class="s0">import </span><span class="s1">java.util.ArrayList;</span>
+<span class="s0">import </span><span class="s1">java.util.HashMap;</span>
+
+<span class="s0">public class </span><span class="s1">ModelProfile </span><span class="s0">implements </span><span class="s1">Serializable {</span>
+
+    <span class="s0">public </span><span class="s1">ArrayList getPreferences() {</span>
+        <span class="s0">return </span><span class="s1">preferences;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setPreferences(ArrayList preferences) {</span>
+        <span class="s0">this</span><span class="s1">.preferences = preferences;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getLast_seen() {</span>
+        <span class="s0">return </span><span class="s1">last_seen;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setLast_seen(String last_seen) {</span>
+        <span class="s0">this</span><span class="s1">.last_seen = last_seen;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">HashMap getWork() {</span>
+        <span class="s0">return </span><span class="s1">work;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setWork(HashMap work) {</span>
+        <span class="s0">this</span><span class="s1">.work = work;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getLast_seen_window() {</span>
+        <span class="s0">return </span><span class="s1">last_seen_window;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setLast_seen_window(String last_seen_window) {</span>
+        <span class="s0">this</span><span class="s1">.last_seen_window = last_seen_window;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">Boolean getHas_active_subscription() {</span>
+        <span class="s0">return </span><span class="s1">has_active_subscription;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setHas_active_subscription(Boolean has_active_subscription) {</span>
+        <span class="s0">this</span><span class="s1">.has_active_subscription = has_active_subscription;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getVerification_status() {</span>
+        <span class="s0">return </span><span class="s1">verification_status;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setVerification_status(String verification_status) {</span>
+        <span class="s0">this</span><span class="s1">.verification_status = verification_status;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">ArrayList getPhotos() {</span>
+        <span class="s0">return </span><span class="s1">photos;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setPhotos(ArrayList photos) {</span>
+        <span class="s0">this</span><span class="s1">.photos = photos;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">HashMap getGeneral_information() {</span>
+        <span class="s0">return </span><span class="s1">general_information;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setGeneral_information(HashMap general_information) {</span>
+        <span class="s0">this</span><span class="s1">.general_information = general_information;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">ArrayList preferences;</span>
+    <span class="s1">String last_seen;</span>
+    <span class="s1">HashMap work;</span>
+    <span class="s1">String last_seen_window;</span>
+    <span class="s1">Boolean has_active_subscription;</span>
+    <span class="s1">String verification_status;</span>
+    <span class="s1">ArrayList photos;</span>
+    <span class="s1">HashMap general_information;</span>
+    <span class="s1">String latest_poll;</span>
+    <span class="s1">String lng;</span>
+    <span class="s1">String poll_info;</span>
+    <span class="s1">ArrayList user_interests;</span>
+    <span class="s1">Boolean show_concierge_badge;</span>
+    <span class="s1">Double approved_time;</span>
+    <span class="s1">ArrayList profile_data_list;</span>
+    <span class="s1">String instagram_images;</span>
+    <span class="s1">Integer online_code;</span>
+    <span class="s1">Boolean is_facebook_data_fetched;</span>
+    <span class="s1">String icebreakers;</span>
+    <span class="s1">String meetup;</span>
+    <span class="s1">String lat;</span>
+    <span class="s1">String story;</span>
+
+    <span class="s0">public </span><span class="s1">String getLatest_poll() {</span>
+        <span class="s0">return </span><span class="s1">latest_poll;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setLatest_poll(String latest_poll) {</span>
+        <span class="s0">this</span><span class="s1">.latest_poll = latest_poll;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getLng() {</span>
+        <span class="s0">return </span><span class="s1">lng;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setLng(String lng) {</span>
+        <span class="s0">this</span><span class="s1">.lng = lng;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getPoll_info() {</span>
+        <span class="s0">return </span><span class="s1">poll_info;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setPoll_info(String poll_info) {</span>
+        <span class="s0">this</span><span class="s1">.poll_info = poll_info;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">ArrayList getUser_interests() {</span>
+        <span class="s0">return </span><span class="s1">user_interests;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setUser_interests(ArrayList user_interests) {</span>
+        <span class="s0">this</span><span class="s1">.user_interests = user_interests;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">Boolean getShow_concierge_badge() {</span>
+        <span class="s0">return </span><span class="s1">show_concierge_badge;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setShow_concierge_badge(Boolean show_concierge_badge) {</span>
+        <span class="s0">this</span><span class="s1">.show_concierge_badge = show_concierge_badge;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">Double getApproved_time() {</span>
+        <span class="s0">return </span><span class="s1">approved_time;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setApproved_time(Double approved_time) {</span>
+        <span class="s0">this</span><span class="s1">.approved_time = approved_time;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">ArrayList getProfile_data_list() {</span>
+        <span class="s0">return </span><span class="s1">profile_data_list;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setProfile_data_list(ArrayList profile_data_list) {</span>
+        <span class="s0">this</span><span class="s1">.profile_data_list = profile_data_list;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getInstagram_images() {</span>
+        <span class="s0">return </span><span class="s1">instagram_images;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setInstagram_images(String instagram_images) {</span>
+        <span class="s0">this</span><span class="s1">.instagram_images = instagram_images;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">Integer getOnline_code() {</span>
+        <span class="s0">return </span><span class="s1">online_code;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setOnline_code(Integer online_code) {</span>
+        <span class="s0">this</span><span class="s1">.online_code = online_code;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">Boolean getIs_facebook_data_fetched() {</span>
+        <span class="s0">return </span><span class="s1">is_facebook_data_fetched;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setIs_facebook_data_fetched(Boolean is_facebook_data_fetched) {</span>
+        <span class="s0">this</span><span class="s1">.is_facebook_data_fetched = is_facebook_data_fetched;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getIcebreakers() {</span>
+        <span class="s0">return </span><span class="s1">icebreakers;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setIcebreakers(String icebreakers) {</span>
+        <span class="s0">this</span><span class="s1">.icebreakers = icebreakers;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getMeetup() {</span>
+        <span class="s0">return </span><span class="s1">meetup;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setMeetup(String meetup) {</span>
+        <span class="s0">this</span><span class="s1">.meetup = meetup;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getLat() {</span>
+        <span class="s0">return </span><span class="s1">lat;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setLat(String lat) {</span>
+        <span class="s0">this</span><span class="s1">.lat = lat;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public </span><span class="s1">String getStory() {</span>
+        <span class="s0">return </span><span class="s1">story;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setStory(String story) {</span>
+        <span class="s0">this</span><span class="s1">.story = story;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>

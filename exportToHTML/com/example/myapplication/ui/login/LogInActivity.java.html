@@ -1,0 +1,204 @@
+<html>
+<head>
+<title>LogInActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+LogInActivity.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.myapplication.ui.login;</span>
+
+<span class="s0">import </span><span class="s1">android.app.ProgressDialog;</span>
+<span class="s0">import </span><span class="s1">android.content.Intent;</span>
+<span class="s0">import </span><span class="s1">android.os.Bundle;</span>
+<span class="s0">import </span><span class="s1">android.os.Handler;</span>
+<span class="s0">import </span><span class="s1">android.os.Looper;</span>
+<span class="s0">import </span><span class="s1">android.view.View;</span>
+<span class="s0">import </span><span class="s1">android.widget.EditText;</span>
+<span class="s0">import </span><span class="s1">android.widget.ImageView;</span>
+<span class="s0">import </span><span class="s1">android.widget.TextView;</span>
+
+<span class="s0">import </span><span class="s1">androidx.appcompat.app.AppCompatActivity;</span>
+
+<span class="s0">import </span><span class="s1">com.example.myapplication.ui.homepage.activity.HomePageActivity;</span>
+<span class="s0">import </span><span class="s1">com.example.myapplication.R;</span>
+<span class="s0">import </span><span class="s1">com.example.myapplication.util.Utils;</span>
+
+<span class="s0">import </span><span class="s1">java.util.HashMap;</span>
+
+<span class="s0">import </span><span class="s1">butterknife.BindView;</span>
+<span class="s0">import </span><span class="s1">butterknife.ButterKnife;</span>
+
+<span class="s0">public class </span><span class="s1">LogInActivity </span><span class="s0">extends </span><span class="s1">AppCompatActivity </span><span class="s0">implements </span><span class="s1">LogInActivityContract.LogInView {</span>
+
+    <span class="s2">//region view variables</span>
+    <span class="s1">@BindView(R.id.continue_button)</span>
+    <span class="s1">TextView continueText;</span>
+    <span class="s1">@BindView(R.id.phone_number_editText)</span>
+    <span class="s1">EditText phoneNumberEditText;</span>
+    <span class="s1">@BindView(R.id.otp_editText)</span>
+    <span class="s1">EditText otpEditText;</span>
+    <span class="s1">@BindView(R.id.phone_number_prefix)</span>
+    <span class="s1">TextView phoneNumberprefix;</span>
+    <span class="s1">@BindView(R.id.edit_icon_imageView)</span>
+    <span class="s1">ImageView editIconImageView;</span>
+    <span class="s1">@BindView(R.id.get_otp_textView)</span>
+    <span class="s1">TextView getOtpTextView;</span>
+    <span class="s1">@BindView(R.id.phone_textView)</span>
+    <span class="s1">TextView phoneTextView;</span>
+    <span class="s2">//endregion</span>
+
+    <span class="s2">//region static variable</span>
+    <span class="s0">public static final </span><span class="s1">String DEFAULT_PHONE_NUMBER = </span><span class="s3">&quot;+919876543212&quot;</span><span class="s1">;</span>
+    <span class="s0">public static final </span><span class="s1">String PHONE_NUMBER = </span><span class="s3">&quot;9876543212&quot;</span><span class="s1">;</span>
+    <span class="s0">public static final </span><span class="s1">String DEFAULT_OTP = </span><span class="s3">&quot;1234&quot;</span><span class="s1">;</span>
+    <span class="s0">public </span><span class="s1">ProgressDialog progressDialog;</span>
+
+    <span class="s2">// endregion</span>
+
+    <span class="s2">//region helper variable</span>
+    <span class="s0">boolean </span><span class="s1">isOtpScreen;</span>
+    <span class="s1">LogInActivityContract.LogInPresenter logInPresenter;</span>
+    <span class="s2">//endregion</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState);</span>
+        <span class="s1">setContentView(R.layout.activity_login);</span>
+        <span class="s1">ButterKnife.bind(</span><span class="s0">this</span><span class="s1">);</span>
+
+        <span class="s1">logInPresenter = </span><span class="s0">new </span><span class="s1">LogInPresenter(</span><span class="s0">this</span><span class="s1">);</span>
+
+        <span class="s1">phoneNumberEditText.setText(PHONE_NUMBER);</span>
+
+        <span class="s1">progressDialog = </span><span class="s0">new </span><span class="s1">ProgressDialog(</span><span class="s0">this</span><span class="s1">);</span>
+        <span class="s1">setUpCLickListener();</span>
+
+    <span class="s1">}</span>
+
+    <span class="s2">// region helper methods</span>
+    <span class="s0">private void </span><span class="s1">setUpCLickListener() {</span>
+
+        <span class="s1">continueText.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View v) {</span>
+
+                <span class="s2">//since button is same . this optScreen varaible helps to maintain which api to hit</span>
+                <span class="s0">if </span><span class="s1">(isOtpScreen) {</span>
+
+                    <span class="s0">if </span><span class="s1">(otpEditText.getText().toString() == </span><span class="s0">null </span><span class="s1">||</span>
+                            <span class="s1">otpEditText.getText().toString() == </span><span class="s3">&quot;&quot;</span><span class="s1">) {</span>
+                        <span class="s1">Utils.showToast(getApplicationContext(), getString(R.string.please_fill_otp));</span>
+                        <span class="s0">return</span><span class="s1">;</span>
+                    <span class="s1">}</span>
+
+                    <span class="s1">HashMap&lt;String, String&gt; hashMap = </span><span class="s0">new </span><span class="s1">HashMap();</span>
+                    <span class="s1">hashMap.put(</span><span class="s3">&quot;number&quot;</span><span class="s1">, DEFAULT_PHONE_NUMBER);</span>
+                    <span class="s1">hashMap.put(</span><span class="s3">&quot;otp&quot;</span><span class="s1">, otpEditText.getText().toString());</span>
+                    <span class="s1">logInPresenter.getTokenAndFetchProfiles(hashMap);</span>
+                <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+
+                    <span class="s0">if </span><span class="s1">(phoneNumberEditText.getText().toString() == </span><span class="s0">null </span><span class="s1">||</span>
+                            <span class="s1">phoneNumberEditText.getText().toString() == </span><span class="s3">&quot;&quot;</span><span class="s1">) {</span>
+                        <span class="s1">Utils.showToast(getApplicationContext(), getString(R.string.please_fill_phone_number));</span>
+                        <span class="s0">return</span><span class="s1">;</span>
+                    <span class="s1">}</span>
+
+                    <span class="s1">HashMap&lt;String, String&gt; hashMap = </span><span class="s0">new </span><span class="s1">HashMap();</span>
+                    <span class="s1">hashMap.put(</span><span class="s3">&quot;number&quot;</span><span class="s1">, </span><span class="s3">&quot;+91&quot;</span><span class="s1">+ phoneNumberEditText.getText().toString());</span>
+                    <span class="s1">logInPresenter.getOtp(hashMap);</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">});</span>
+
+        <span class="s1">editIconImageView.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View v) {</span>
+                <span class="s1">onBackPressed();</span>
+            <span class="s1">}</span>
+        <span class="s1">});</span>
+    <span class="s1">}</span>
+
+    <span class="s2">// endregion</span>
+
+    <span class="s2">// region presenters methods</span>
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onSuccess() {</span>
+        <span class="s2">// hide phone number</span>
+        <span class="s1">phoneNumberEditText.setVisibility(View.GONE);</span>
+        <span class="s1">phoneNumberprefix.setVisibility(View.GONE);</span>
+
+        <span class="s2">//show otp edit text</span>
+        <span class="s1">otpEditText.setVisibility(View.VISIBLE);</span>
+        <span class="s1">editIconImageView.setVisibility(View.VISIBLE);</span>
+
+        <span class="s2">// update otp screen</span>
+        <span class="s1">getOtpTextView.setText(DEFAULT_PHONE_NUMBER);</span>
+        <span class="s1">phoneTextView.setText(R.string.enter_the_otp);</span>
+        <span class="s1">otpEditText.setText(DEFAULT_OTP);</span>
+        <span class="s1">isOtpScreen = </span><span class="s0">true</span><span class="s1">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">onFailure() {</span>
+        <span class="s1">Utils.showToast(</span><span class="s0">this</span><span class="s1">, getString(R.string.some_error_occured));</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">openHomeActivity(HashMap hashMap) {</span>
+
+        <span class="s2">//setting up bundle</span>
+        <span class="s1">Bundle extras = </span><span class="s0">new </span><span class="s1">Bundle();</span>
+        <span class="s1">extras.putSerializable(</span><span class="s3">&quot;HashMap&quot;</span><span class="s1">, hashMap);</span>
+
+        <span class="s2">//opening activity</span>
+        <span class="s1">Intent intent = </span><span class="s0">new </span><span class="s1">Intent(</span><span class="s0">this</span><span class="s1">, HomePageActivity.</span><span class="s0">class</span><span class="s1">);</span>
+        <span class="s1">intent.putExtras(extras);</span>
+        <span class="s1">startActivity(intent);</span>
+
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">showProgressBar() {</span>
+        <span class="s0">new </span><span class="s1">Handler(Looper.getMainLooper()).post(</span><span class="s0">new </span><span class="s1">Runnable() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">run() {</span>
+                <span class="s1">progressDialog.setIndeterminate(</span><span class="s0">true</span><span class="s1">);</span>
+                <span class="s1">progressDialog.setMessage(</span><span class="s3">&quot;Loading...Please wait&quot;</span><span class="s1">);</span>
+                <span class="s1">progressDialog.setCancelable(</span><span class="s0">false</span><span class="s1">);</span>
+                <span class="s1">progressDialog.setCanceledOnTouchOutside(</span><span class="s0">false</span><span class="s1">);</span>
+                <span class="s0">if </span><span class="s1">(!progressDialog.isShowing()) {</span>
+                    <span class="s1">progressDialog.show();</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">});</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">public void </span><span class="s1">hideProgressBar() {</span>
+        <span class="s0">new </span><span class="s1">Handler(Looper.getMainLooper()).post(</span><span class="s0">new </span><span class="s1">Runnable() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">run() {</span>
+                <span class="s0">try </span><span class="s1">{</span>
+                    <span class="s0">if </span><span class="s1">(progressDialog != </span><span class="s0">null </span><span class="s1">&amp;&amp; progressDialog.isShowing()) {</span>
+                        <span class="s1">progressDialog.dismiss();</span>
+                    <span class="s1">}</span>
+                <span class="s1">} </span><span class="s0">catch </span><span class="s1">(Exception e) {</span>
+                    <span class="s1">e.printStackTrace();</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">});</span>
+    <span class="s1">}</span>
+    <span class="s2">//endregion</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

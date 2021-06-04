@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">LogIN</string>
+    <string name="get_otp">Get OTP</string>
+    <string name="enter_your_">Enter Your\nPhone Number</string>
+    <string name="continues">Continue</string>
+    <string name="interested_">Interested In You</string>
+    <string name="premium_mem">Premium members can\nview all their likes at once\u00E2\u0080\u00A8</string>
+    <string name="notes">
+Notes
+</string>
+    <string name="please_fill_phone_number">Please fill phone number</string>
+    <string name="please_fill_otp">Please fill otp</string>
+    <string name="some_error_occured">Some error Occurred, try again</string>
+    <string name="enter_the_otp">Enter the\nOTP</string>
+</resources>
